@@ -1,7 +1,18 @@
 import Results from "@/Components/Results";
 import Spinner from "@/Components/Spinner";
+import { Suspense } from 'react';
 
 const API_KEY = process.env.API_KEY;
+
+
+
+function SuspenseWrapper({ children }) {
+  return (
+    <Suspense fallback={<Spinner />}>
+      {children}
+    </Suspense>
+  );
+}
 async function Home({ searchParams }) {
   const genre = searchParams.genre || "fetchTrending";
 
@@ -23,4 +34,10 @@ async function Home({ searchParams }) {
   </div>;
 }
 
-export default Home;
+export default function HomePage({ searchParams }) {
+  return (
+    <SuspenseWrapper>
+      <Home searchParams={searchParams} />
+    </SuspenseWrapper>
+  );
+}
