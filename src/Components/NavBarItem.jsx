@@ -1,36 +1,35 @@
-// Import necessary components
+"use client";
 import Link from "next/link";
-import { Suspense } from 'react';
+import { Suspense } from 'react'; 
 import { useSearchParams } from "next/navigation";
 
-// Suspense wrapper for components using useSearchParams
 function SuspenseWrapper({ children }) {
   return (
-    <Suspense fallback={<div>Loading Navigation...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       {children}
     </Suspense>
   );
 }
 
-// Navigation bar item component with search parameter handling
 export default function NavBarItem({ title, param }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  // Helper function to update search parameters
-  const handleGenreChange = () => {
-    setSearchParams({ genre: param });
-  };
-
   return (
     <SuspenseWrapper>
-      <Link
-        className={`hover:text-amber-600 font-semibold py-2 px-4 rounded-lg 
-          ${searchParams.get("genre") === param ? "bg-amber-100 text-amber-700" : ""}`}
-        href={`/?genre=${param}`}
-        onClick={handleGenreChange} // Update search params on click
-      >
-        {title}
-      </Link>
+      <NavBarItemContent title={title} param={param} />
     </SuspenseWrapper>
+  );
+}
+
+function NavBarItemContent({ title, param }) {
+  const searchParams = useSearchParams();
+  let genre = searchParams.get("genre");
+  return (
+    <Link
+      className={`hover:text-amber-600 font-semibold  ${
+        genre === param ? "underline underline-offset-8 decoration-4 decoration-amber-500 rounded-lg " : ""
+      }}`}
+      href={`/?genre=${param}`}
+    >
+      {title}
+    </Link>
   );
 }
