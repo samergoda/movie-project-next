@@ -1,28 +1,8 @@
 "use client";
 import Link from "next/link";
-import { Suspense } from 'react'; // Import Suspense
 import { useSearchParams } from "next/navigation";
-
-// Suspense wrapper for components using useSearchParams
-function SuspenseWrapper({ children }) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {children}
-    </Suspense>
-  );
-}
-
+//453dc5c6587566b1dc3d1aac4a0bcc9a
 export default function NavBarItem({ title, param }) {
-  // Wrap useSearchParams inside SuspenseWrapper
-  return (
-    <SuspenseWrapper>
-      <NavBarItemContent title={title} param={param} />
-    </SuspenseWrapper>
-  );
-}
-
-// Content of NavBarItem using useSearchParams
-function NavBarItemContent({ title, param }) {
   const searchParams = useSearchParams();
   let genre = searchParams.get("genre");
   return (

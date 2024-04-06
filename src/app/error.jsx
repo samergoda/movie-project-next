@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 
-function Error({error,reset}) {
+function error({error,reset}) {
     useEffect(()=>{
         // reset()
         console.log(error)
@@ -15,4 +15,4 @@ function Error({error,reset}) {
     )
 }
 
-export default Error
+export default error
